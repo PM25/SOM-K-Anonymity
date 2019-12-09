@@ -9,5 +9,5 @@
 * Adult Dataset<br>
   https://www.kaggle.com/wenruliu/adult-income-dataset/data
 
-### 📌 Important
+### 📌 Note
 * Create an empty folder called ***"data"*** and put the "adult.csv" under it before using the code.
