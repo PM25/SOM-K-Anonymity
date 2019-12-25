@@ -6,7 +6,7 @@ import numpy as np
 
 
 # Start from here!
-if(__name__ == "__main__"):
+if __name__ == "__main__":
     # Get Data & Data Preprocessing
     data = Data()
     X, y = data.clean()
@@ -15,6 +15,6 @@ if(__name__ == "__main__"):
     som = SOM(X, y)
     som.train(width=100, height=100)
     new_data = som.get_map()
-    
+
     # Apply KdTree
     kdtree = KdTree()

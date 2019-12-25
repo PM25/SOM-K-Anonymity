@@ -34,4 +34,3 @@ class SOM:
             if(verbose == True and step % log == 0):
                 print(f'*Plotting SOM: [{step}/{self  .nrow}]')
         plt.show()
-        

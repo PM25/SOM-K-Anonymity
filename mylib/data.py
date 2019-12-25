@@ -1,27 +1,24 @@
 import pandas as pd
+import np
 from pandas.api.types import is_numeric_dtype
-from sklearn.preprocessing import LabelEncoder
-
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
 
 # Preprocessing Adult dataset
+
+
 class Data:
     # Load Adult dataset and seperate to features(X) and target(y)
     def __init__(self, path='data/adult.csv'):
-        df = pd.read_csv(path)
-        self.X = df.iloc[:, :-1]
-        self.y = df.iloc[:, -1:]
-    
-    # Apply Label Encoding on features(X) and target(y)
-    # and Convert DataFrame to Numpy type
-    def clean(self):
-        X = self.label_encoding(self.X)
-        y = self.label_encoding(self.y)
-        return (X.values, y.values)
+        df = shuffle(pd.read_csv(path))
+        df = self.clean(df)
 
-    # Apply Label Encoding on non-numeric columns
-    def label_encoding(self, df):
-        labelencoder = LabelEncoder()
-        for col in df.columns:
-            if(not is_numeric_dtype(df[col])):
-                df[col] = labelencoder.fit_transform(df[col])
-        return df
+        self.y = df.pop('income')
+        self.X = df
+
+    def clean(self, df):
+        return df.replace(' ?', np.nan).dropna()
+
+    def train_test_split(self):
+        pass
