@@ -1,11 +1,8 @@
+import numpy as np
 import pandas as pd
-import np
-from pandas.api.types import is_numeric_dtype
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
 from sklearn.utils import shuffle
-
-# Preprocessing Adult dataset
+from sklearn.model_selection import train_test_split
 
 
 class Data:
@@ -17,8 +14,23 @@ class Data:
         self.y = df.pop('income')
         self.X = df
 
+        # Label encode y
+        self.y_encoder = LabelEncoder()
+        self.y = self.y_encoder.fit_transform(self.y)
+
+        # One Hot encode X
+        self.X = pd.get_dummies(self.X)
+
+        for name in self.X.columns:
+            if self.X[name].dtype == 'object':
+                self.X[name] = self.X[name].astype('category')
+
     def clean(self, df):
-        return df.replace(' ?', np.nan).dropna()
+        return df.replace('?', np.nan).dropna().drop('fnlwgt', axis=1)
 
     def train_test_split(self):
-        pass
+        X_train, X_test, y_train, y_test = train_test_split(
+            self.X, self.y, test_size=0.2)
+        y_train = pd.Series(y_train, index=X_train.index)
+        y_test = pd.Series(y_test, index=X_test.index)
+        return (X_train, X_test, y_train, y_test)
