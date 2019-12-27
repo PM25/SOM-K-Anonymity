@@ -11,12 +11,14 @@ if __name__ == "__main__":
 
     runners = []
 
+    # Creat a base model to compare the result.
     original_runner = TrainRunner('Original')
     runners.append(original_runner)
 
     quasi_identifiers = ['age', 'educational-num',
                          'capital-gain', 'capital-loss', 'hours-per-week']
 
+    # Choose different k size.
     sizes = [5, 10, 15, 20, 30, 50]
 
     for size in sizes:

@@ -1,6 +1,15 @@
 from .model import TrainingModel
 
+
 class TrainRunner:
+    """The class automate the preprocess data and train a model's process.
+    
+        Args:
+            name: The name of the runner.
+            perturbators: A list of perturbators, the perturbator should implements a perturbate
+            function. The perturbator will be used in order when preprocess is called.
+    """
+
     def __init__(self, name, perturbators=[]):
         self.perturbators = perturbators
         self.model = None
