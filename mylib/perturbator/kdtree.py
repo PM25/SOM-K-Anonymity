@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from minisom import MiniSom
 from .perturbator import Perturbator
@@ -104,7 +105,7 @@ class SOM_K_Anonymity(K_Anonymity):
         df_som = df[self.som_columns]
         som = MiniSom(self.som_size[0], self.som_size[1], df_som.shape[1])
         som.train_random(df_som.values, 10)
-        coordinates = [som.winner(series.to_numpy())
+        coordinates = [som.winner(np.array(series))
                        for index, series in df_som.iterrows()]
         df_coordinates = pd.DataFrame(
             coordinates, index=df.index, columns=['x axis', 'y axis'])

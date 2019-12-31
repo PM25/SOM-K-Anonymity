@@ -1,8 +1,8 @@
 import pandas as pd
-from mylib.helper import timeit, profile
 from mylib.data import Data
-from mylib.perturbator import K_Anonymity, SOM_K_Anonymity
 from mylib.runner import TrainRunner
+from mylib.helper import timeit, profile
+from mylib.perturbator import K_Anonymity, SOM_K_Anonymity
 
 # Start from here!
 if __name__ == "__main__":
