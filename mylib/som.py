@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 class SOM:
-    def __init__(self, features, target):
+    def __init__(self, features, target=[]):
         self.features = features
         self.nfeatures = features.shape[1]
         self.nrow = features.shape[0]
@@ -13,8 +13,8 @@ class SOM:
         self.colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w']
 
     #  Training SOM model
-    def train(self, width=10, height=10, sigma=.9, lr=.2, epochs=1e5):
-        self.som = MiniSom(width, height, self.nfeatures, sigma=sigma, learning_rate=lr)
+    def train(self, width=10, height=10, epochs=1e5):
+        self.som = MiniSom(width, height, self.nfeatures, random_seed=10)
         self.som.train_random(self.features, int(epochs), verbose=True)
     
     # Get the SOM results

@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from minisom import MiniSom
+# from mylib.som import SOM
 from .perturbator import Perturbator
 
 class Mondrian(Perturbator):
@@ -103,7 +104,7 @@ class SOM_K_Anonymity(K_Anonymity):
 
     def perturbate(self, df):
         df_som = df[self.som_columns]
-        som = MiniSom(self.som_size[0], self.som_size[1], df_som.shape[1])
+        som = MiniSom(self.som_size[0], self.som_size[1], df_som.shape[1], random_seed=10)
         som.train_random(df_som.values, 10)
         coordinates = [som.winner(np.array(series))
                        for index, series in df_som.iterrows()]
